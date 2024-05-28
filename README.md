@@ -1,0 +1,2 @@
+# traditionalColors
+Chinese traditional colors
