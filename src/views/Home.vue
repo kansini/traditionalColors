@@ -29,7 +29,7 @@ onMounted(() => {
   getColor()
 })
 const backgroundColor = ref('')
-const handleClickItem = (color) => {
+const handleClickItem = (color:string) => {
   backgroundColor.value = color
 }
 </script>
