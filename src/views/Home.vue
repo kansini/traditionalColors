@@ -21,15 +21,13 @@ const colors = reactive<IGroup[]>([])
 const getColor = () => {
   getList('colors.json').then((res: any) => {
     Object.assign(colors, res.data)
-  }).finally(() => {
-    console.log('colors', colors)
   })
 }
 onMounted(() => {
   getColor()
 })
 const backgroundColor = ref('')
-const handleClickItem = (color:string) => {
+const handleClickItem = (color: string) => {
   backgroundColor.value = color
 }
 </script>
@@ -40,13 +38,15 @@ const handleClickItem = (color:string) => {
          v-for="(group, index) in colors"
          :key="index">
       <div class="color-group-title"> {{ group.name }}</div>
-      <div class="color-item"
-           @click="handleClickItem(color.hex)"
-           v-for="(color, index) in group.colors"
-           :key="index"
-           :style="{backgroundColor: color.hex}">
-        <div class="color-item-name">
-          {{ color.name }}
+      <div class="color-group-content">
+        <div class="color-item"
+             @click="handleClickItem(color.hex)"
+             v-for="(color, index) in group.colors"
+             :key="index"
+             :style="{backgroundColor: color.hex}">
+          <div class="color-item-name">
+            {{ color.name }}
+          </div>
         </div>
       </div>
     </div>
@@ -57,31 +57,34 @@ const handleClickItem = (color:string) => {
 .color-container {
   width: 100%;
   height: 100vh;
-  overflow: auto;
   transition: all ease-in .3s;
 
   .color-group {
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-
     .color-group-title {
       width: 100%;
+      padding: 8px 0;
     }
 
-    .color-item {
+    .color-group-content {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 160px;
-      height: 80px;
-      border-radius: 16px;
-      background-blend-mode: difference;
+      gap: 12px;
+      flex-wrap: wrap;
 
-      .color-item-name {
-        font-size: 16px;
-        font-weight: bold;
-        color: #fff;
+      .color-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 40px;
+        border-radius: 16px;
+        background-blend-mode: difference;
+        cursor: pointer;
+
+        .color-item-name {
+          font-size: 16px;
+          font-weight: bold;
+          color: #fff;
+        }
       }
     }
   }
