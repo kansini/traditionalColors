@@ -47,8 +47,8 @@ const handleClick = () => {
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 1), 0 0 0 1px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 1);
 
     .color-title-text {
-      font-size: 36px;
-      width: 36px;
+      font-size: 32px;
+      width: 32px;
       font-weight: 600;
     }
   }
