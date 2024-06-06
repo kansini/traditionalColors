@@ -1,38 +1,43 @@
 <script lang="ts" setup>
-import {onMounted, onUnmounted, ref} from 'vue'
+import {computed, onMounted, onUnmounted, ref} from 'vue'
 import {ScrollToPlugin} from 'gsap/ScrollToPlugin';
 import gsap from 'gsap'
 
 gsap.registerPlugin(ScrollToPlugin)
 
 interface Props {
-  size?: string
-  text?: string
-  innerText?: string
-  color?: string
+  size?: string;
+  text?: string;
+  innerText?: string;
+  color?: number[];
 }
 
 const props = withDefaults(defineProps<Props>(), {
   size: '',
-  text: '中国典籍·The Ancient Chinese Classics·',
-  innerText: "色"
+  text: '',
+  innerText: ""
 })
 const cursorInner = ref(null)
 const cursorOuter = ref(null)
 const onMouseMove = (e: any) => {
   const offset = props.size == '' ? 24 : 56
   // cursorInner.value.style.opacity = 1
-  gsap.to(cursorOuter.value, 0.4, {
+  gsap.to(cursorOuter.value, {
     x: e.clientX - offset,
     y: e.clientY - offset,
     opacity: 1
   })
-  gsap.to(cursorInner.value, 0.1, {
+  gsap.to(cursorInner.value, {
     x: e.clientX - 4,
     y: e.clientY - 4,
     opacity: 1
   })
 }
+const innerColor = computed(() => {
+  const [r, g, b] = props.color as number[];
+  const a = 1
+  return `rgba(${r + 20},${g + 10},${b + 10},${a})`
+})
 onMounted(() => {
   document.addEventListener('mousemove', onMouseMove)
 })
@@ -47,7 +52,6 @@ onUnmounted(() => {
     <div ref="cursorOuter"
          class="custom-cursor-outer"
          :class="`cursor-${size}`"
-         :style="{borderColor:color}"
     >
       <svg viewBox="0 0 180 180" v-if="size == 'large'">
         <path fill="transparent" id="textcircle" d="M9,90a81,81,0,1,1,81,81A81,81,0,0,1,9,90"></path>
@@ -59,6 +63,7 @@ onUnmounted(() => {
     <div
         ref="cursorInner"
         class="custom-cursor-inner"
+        :style="{background:innerColor}"
         :data-text="innerText"
     >
     </div>
@@ -111,26 +116,25 @@ onUnmounted(() => {
     align-items: center;
     justify-content: center;
     padding: 8px;
-    width: 144px;
-    height: 144px;
+    width: 160px;
+    height: 160px;
     background: rgba(255, 255, 255, .1);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     transition: width ease-in-out .3s, height ease-in-out .3s;
 
     & + .custom-cursor-inner {
-      background: $tcc-red;
-      width: 40px;
-      height: 40px;
+      //background: $tcc-red;
+      width: 56px;
+      height: 56px;
       padding: 4px;
-      color: rgba(255, 255, 255, 1);
+      color: rgba(0, 0, 0, 1);
     }
 
     svg {
       text {
         animation: rotation 10s linear infinite;
         transform-origin: 50%;
-        font-family: "carved";
         fill: $tcc-blue;
         //letter-spacing: 6px;
         font-size: 20px;
