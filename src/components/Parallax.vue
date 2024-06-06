@@ -13,16 +13,7 @@ const targetStyle: CSSProperties = {
   minHeight: '500px',
   transition: '.3s ease-out all',
 }
-const cardWindowStyle: CSSProperties = {
-  overflow: 'hidden',
-  fontSize: '6rem',
-  position: 'absolute',
-  top: 'calc(50% - 1em)',
-  left: 'calc(50% - 1em)',
-  height: '2em',
-  width: '2em',
-  margin: 'auto',
-}
+
 // const layerBase: CSSProperties = {
 //   position: 'absolute',
 //   height: '100%',
@@ -43,15 +34,16 @@ const containerStyle: CSSProperties = {
 
 const cardStyle = computed(() => ({
   // background: '#fff',
-  height: '20rem',
-  width: '8em',
-  borderRadius: '5px',
-  // border: '1px solid #cdcdcd',
+  height: 'max-content',
+  width: 'max-content',
+  borderRadius: '8px',
+  border: '1px solid #b7ae8f',
+  padding: '8px',
   overflow: 'hidden',
   transition: '.3s ease-out all',
-  // boxShadow: '0 0 20px 0 rgba(255, 255, 255, 0.25)',
-  transform: `rotateX(${parallax.roll * 20}deg) rotateY(${
-      parallax.tilt * 20
+  // boxShadow: '0 0 0 4px #b7ae8f',
+  transform: `rotateX(${parallax.roll * 10}deg) rotateY(${
+      parallax.tilt * 30
   }deg)`,
 }))
 </script>
@@ -61,9 +53,7 @@ const cardStyle = computed(() => ({
     <div ref="target" :style="targetStyle">
       <div :style="containerStyle">
         <div :style="cardStyle">
-          <div :style="cardWindowStyle">
-           <slot></slot>
-          </div>
+          <slot></slot>
         </div>
       </div>
     </div>

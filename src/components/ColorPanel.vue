@@ -5,7 +5,7 @@ import CustomCursor from "./kits/CustomCursor.vue";
 import ColorItem from "./ColorItem.vue";
 import {Clipboard} from '../utils/clipboard';
 import Toast from "./kits/Toast.vue";
-// import Parallax from "./Parallax.vue";
+import Parallax from "./Parallax.vue";
 
 const current = ref(0)
 const {colors} = useColors();
@@ -30,7 +30,7 @@ const handleNext = () => {
   handleClick()
   setTimeout(() => {
     cursorInnerText.value = '下一个'
-  }, 500)
+  }, 1200)
 }
 const handlePrev = () => {
   current.value--
@@ -40,7 +40,7 @@ const handlePrev = () => {
   handleClick()
   setTimeout(() => {
     cursorInnerText.value = '上一个'
-  }, 500)
+  }, 1200)
 }
 const showToast = ref(false)
 const onClickItem = (hex: string) => {
@@ -78,14 +78,16 @@ const copyContent = computed(() => {
          @mouseleave="cursorInnerText =  colors[current].name"
     ></div>
     <div class="color-panel-title">
-      <div>中国传统色彩</div>
-      <div>——· Traditional Chinese colors ·——</div>
+      <div class="title-cn">中国传统色彩</div>
+      <div class="title-en">——· Traditional Chinese colors ·——</div>
     </div>
     <div class="color-panel-container">
-      <color-item
-          @click="onClickItem(colors[current].hex)"
-          :title="colors[current]?.name"
-      />
+      <Parallax>
+        <color-item
+            @click="onClickItem(colors[current].hex)"
+            :title="colors[current]?.name"
+        />
+      </Parallax>
     </div>
   </div>
 </template>
@@ -98,7 +100,7 @@ const copyContent = computed(() => {
   height: 100vh;
   overflow: hidden;
   cursor: pointer;
-  transition: all ease-in 2s;
+  transition: all ease-in 1.2s;
 
   [class^="panel-nav-"] {
     position: absolute;
@@ -120,10 +122,14 @@ const copyContent = computed(() => {
     width: 100%;
     text-align: center;
 
-    div:nth-child(1) {
+    .title-cn {
       font-size: 48px;
       letter-spacing: 12px;
-      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .title-en {
+      font-family: "carved", serif;
     }
   }
 
