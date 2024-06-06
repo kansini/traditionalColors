@@ -37,7 +37,7 @@ const cardStyle = computed(() => ({
   height: 'max-content',
   width: 'max-content',
   borderRadius: '8px',
-  border: '1px solid #b7ae8f',
+  // border: '1px solid #b7ae8f',
   padding: '8px',
   overflow: 'hidden',
   transition: '.3s ease-out all',

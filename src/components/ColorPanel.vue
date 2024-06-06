@@ -5,9 +5,10 @@ import CustomCursor from "./kits/CustomCursor.vue";
 import ColorItem from "./ColorItem.vue";
 import {Clipboard} from '../utils/clipboard';
 import Toast from "./kits/Toast.vue";
-import Parallax from "./Parallax.vue";
+// import Parallax from "./Parallax.vue";
 
 const current = ref(0)
+const currentText = ref(0)
 const {colors} = useColors();
 const cursorSize = ref('large')
 const cursorColor = ref<number[]>([249, 244, 220])
@@ -29,8 +30,9 @@ const handleNext = () => {
   }
   handleClick()
   setTimeout(() => {
+    currentText.value = current.value
     cursorInnerText.value = '下一个'
-  }, 1200)
+  }, 500)
 }
 const handlePrev = () => {
   current.value--
@@ -39,8 +41,9 @@ const handlePrev = () => {
   }
   handleClick()
   setTimeout(() => {
+    currentText.value = current.value
     cursorInnerText.value = '上一个'
-  }, 1200)
+  }, 500)
 }
 const showToast = ref(false)
 const onClickItem = (hex: string) => {
@@ -48,7 +51,7 @@ const onClickItem = (hex: string) => {
   showToast.value = true
   setTimeout(() => {
     showToast.value = false
-  }, 1000)
+  }, 1500)
 }
 const copyContent = computed(() => {
   return `复制成功: ${colors[current.value]?.name}${colors[current.value]?.hex}`
@@ -78,16 +81,15 @@ const copyContent = computed(() => {
          @mouseleave="cursorInnerText =  colors[current].name"
     ></div>
     <div class="color-panel-title">
-      <div class="title-cn">中国传统色彩</div>
+      <div class="title-cn">中国传统色</div>
       <div class="title-en">——· Traditional Chinese colors ·——</div>
     </div>
     <div class="color-panel-container">
-      <Parallax>
-        <color-item
+      <color-item
             @click="onClickItem(colors[current].hex)"
             :title="colors[current]?.name"
+            :show="currentText === colors[current]?.id"
         />
-      </Parallax>
     </div>
   </div>
 </template>
@@ -118,13 +120,13 @@ const copyContent = computed(() => {
   }
 
   .color-panel-title {
-    font-size: 20px;
+    font-size: 18px;
     width: 100%;
     text-align: center;
 
     .title-cn {
       font-size: 48px;
-      letter-spacing: 12px;
+      letter-spacing: 16px;
       margin-bottom: 8px;
     }
 

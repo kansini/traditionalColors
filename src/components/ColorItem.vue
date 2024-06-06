@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 defineProps({
   title: {
     type: String,
@@ -6,7 +7,11 @@ defineProps({
   },
   fontSize: {
     type: Number,
-    default: 28
+    default: 32
+  },
+  show: {
+    type: Boolean,
+    default: false
   }
 })
 const emit = defineEmits(['click'])
@@ -17,9 +22,15 @@ const handleClick = () => {
 
 <template>
   <div class="color-title inset-circle" @click="handleClick">
-    <div class="color-title-text" :style="{'font-size': `${fontSize}px`}">
-      {{ title }}
-    </div>
+    <transition name="fadeIn">
+      <div
+          class="color-title-text"
+          :style="{'font-size': `${fontSize}px`}"
+          v-if="show"
+      >
+        {{ title }}
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -27,12 +38,18 @@ const handleClick = () => {
 .color-title {
   display: flex;
   justify-content: center;
-  padding: 32px 24px;
+  align-items: center;
+  width: 80px;
+  height: 226px;
   user-select: none;
   transition: all ease-in .3s;
   color: #fff;
-  //border: 1px solid rgba(0, 0, 0, 1);
-  //box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 1), 0 0 0 1px rgba(255, 255, 255, 1), 0 0 0 4px rgba(0, 0, 0, 1);
+  filter: brightness(1) drop-shadow(0 0 0 rgba(183, 174, 143, .5));
+  overflow: hidden;
+
+  &:hover {
+    filter: brightness(1.1) drop-shadow(8px 8px 2px rgba(183, 174, 143, .5));
+  }
 
   &.inset-circle {
     background-size: 70% 70%;

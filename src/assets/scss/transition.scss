@@ -14,7 +14,7 @@
 .fadeRight-enter-active,
 .fadeRight-leave-active,
 .fadeDown-enter-active,
-.fadeDown-leave-active{
+.fadeDown-leave-active {
   transition: opacity .4s ease, transform .3s ease, filter .2s ease-in;
 }
 
@@ -36,8 +36,9 @@
   opacity: 0;
   filter: blur(8px);
 }
+
 .scaleIn-enter-active,
-.scaleIn-leave-active{
+.scaleIn-leave-active {
   transition: opacity .4s ease, transform .5s ease;
 }
 
@@ -48,14 +49,14 @@
 }
 
 .fadeIn-enter-active,
-.fadeIn-leave {
-  transition: all ease .6s;
+.fadeIn-leave-active {
+  transition: opacity .2s ease, filter .3s ease-in;
 }
 
-.fadeIn-leave-active,
-.fadeIn-enter {
-  transition: all ease .4s;
+.fadeIn-enter-from,
+.fadeIn-leave-to {
   opacity: 0;
+  filter: blur(8px);
 }
 
 .slideUp-leave-active,

@@ -1,5 +1,6 @@
 [
   {
+    "id": 0,
     "CMYK": [
       4,
       5,
@@ -16,6 +17,7 @@
     "pinyin": "rubai"
   },
   {
+    "id": 1,
     "CMYK": [
       3,
       8,
@@ -32,6 +34,7 @@
     "pinyin": "xingrenhuang"
   },
   {
+    "id": 2,
     "CMYK": [
       4,
       13,
@@ -48,6 +51,7 @@
     "pinyin": "molihuang"
   },
   {
+    "id": 3,
     "CMYK": [
       5,
       14,
@@ -64,6 +68,7 @@
     "pinyin": "maiganhuang"
   },
   {
+    "id": 4,
     "CMYK": [
       2,
       16,
@@ -80,6 +85,7 @@
     "pinyin": "youcaihuahuang"
   },
   {
+    "id": 5,
     "CMYK": [
       1,
       18,
@@ -96,6 +102,7 @@
     "pinyin": "foshouhuang"
   },
   {
+    "id": 6,
     "CMYK": [
       3,
       16,
@@ -112,6 +119,7 @@
     "pinyin": "miehuang"
   },
   {
+    "id": 7,
     "CMYK": [
       3,
       17,
@@ -128,6 +136,7 @@
     "pinyin": "kuishanhuang"
   },
   {
+    "id": 8,
     "CMYK": [
       0,
       20,
@@ -144,6 +153,7 @@
     "pinyin": "ningmenghuang"
   },
   {
+    "id": 9,
     "CMYK": [
       0,
       20,
@@ -160,6 +170,7 @@
     "pinyin": "jinguahuang"
   },
   {
+    "id": 10,
     "CMYK": [
       0,
       21,
@@ -176,6 +187,7 @@
     "pinyin": "tenghuang"
   },
   {
+    "id": 11,
     "CMYK": [
       2,
       16,
@@ -192,6 +204,7 @@
     "pinyin": "laohuang"
   },
   {
+    "id": 12,
     "CMYK": [
       1,
       17,
@@ -208,6 +221,7 @@
     "pinyin": "xiangshuimeiguihuang"
   },
   {
+    "id": 13,
     "CMYK": [
       1,
       21,
@@ -224,6 +238,7 @@
     "pinyin": "danmihuang"
   },
   {
+    "id": 14,
     "CMYK": [
       0,
       23,
@@ -240,6 +255,7 @@
     "pinyin": "dadouhuang"
   },
   {
+    "id": 15,
     "CMYK": [
       0,
       24,
@@ -256,6 +272,7 @@
     "pinyin": "suxinhuang"
   },
   {
+    "id": 16,
     "CMYK": [
       0,
       24,
@@ -272,6 +289,7 @@
     "pinyin": "xiangrikuihuang"
   },
   {
+    "id": 17,
     "CMYK": [
       0,
       27,
@@ -288,6 +306,7 @@
     "pinyin": "yalihuang"
   },
   {
+    "id": 18,
     "CMYK": [
       0,
       28,
@@ -304,6 +323,7 @@
     "pinyin": "huanglianhuang"
   },
   {
+    "id": 19,
     "CMYK": [
       0,
       29,
@@ -320,6 +340,7 @@
     "pinyin": "jinzhanhuang"
   },
   {
+    "id": 20,
     "CMYK": [
       0,
       32,
@@ -336,6 +357,7 @@
     "pinyin": "dankehuang"
   },
   {
+    "id": 21,
     "CMYK": [
       0,
       32,
@@ -352,6 +374,7 @@
     "pinyin": "rouse"
   },
   {
+    "id": 22,
     "CMYK": [
       0,
       35,
@@ -368,6 +391,7 @@
     "pinyin": "ezhanghuang"
   },
   {
+    "id": 23,
     "CMYK": [
       0,
       36,
@@ -384,6 +408,7 @@
     "pinyin": "jidanhuang"
   },
   {
+    "id": 24,
     "CMYK": [
       0,
       35,
@@ -400,6 +425,7 @@
     "pinyin": "youhuang"
   },
   {
+    "id": 25,
     "CMYK": [
       0,
       44,
@@ -416,6 +442,7 @@
     "pinyin": "liuehuang"
   },
   {
+    "id": 26,
     "CMYK": [
       0,
       45,
@@ -432,6 +459,7 @@
     "pinyin": "danjucheng"
   },
   {
+    "id": 27,
     "CMYK": [
       0,
       47,
@@ -448,6 +476,7 @@
     "pinyin": "pipahuang"
   },
   {
+    "id": 28,
     "CMYK": [
       0,
       47,
@@ -464,6 +493,7 @@
     "pinyin": "chengpihuang"
   },
   {
+    "id": 29,
     "CMYK": [
       0,
       56,
@@ -480,6 +510,7 @@
     "pinyin": "beiguahuang"
   },
   {
+    "id": 30,
     "CMYK": [
       0,
       54,
