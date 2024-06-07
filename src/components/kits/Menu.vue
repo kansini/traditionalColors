@@ -7,10 +7,10 @@ const emit = defineEmits(["mouseenter", "clickItem"])
 const showModal = ref(false)
 
 const {colorsByCategory} = useColors()
-const handleClickItem = (item: any, group: any, groupIndex: number, index: number) => {
+const handleClickItem = (groupIndex: number, index: number) => {
   const length = 16
-  const id = groupIndex * length + index
-  emit("clickItem", item, id)
+  const id: number = groupIndex * length + index
+  emit("clickItem", id)
 }
 </script>
 
@@ -26,7 +26,7 @@ const handleClickItem = (item: any, group: any, groupIndex: number, index: numbe
       <div
           class="menu-item"
           v-for="(item,index) in group.data"
-          @click="handleClickItem(item,group,groupIndex,index)">
+          @click="handleClickItem(groupIndex,index)">
         {{ item.name }}
       </div>
     </div>

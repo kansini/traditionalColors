@@ -57,7 +57,7 @@ const onClickItem = (color: any) => {
 const copyContent = computed(() => {
   return `复制成功: ${colors[current.value]?.name}${colors[current.value]?.hex}`
 })
-const handleClickMenuItem = (item, id) => {
+const handleClickMenuItem = (id: number) => {
   current.value = id
   setTimeout(() => {
     currentId.value = current.value
