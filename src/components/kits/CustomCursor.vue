@@ -94,11 +94,11 @@ onUnmounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 8px;
-    height: 8px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: rgba(227, 0, 0, .6);
-    color: rgba(0, 0, 0, 0);
+    //color: rgba(0, 0, 0, 0);
     will-change: transform;
     opacity: 0;
     font-size: 14px;
@@ -153,6 +153,7 @@ onUnmounted(() => {
   }
 
   .cursor-small {
+    display: none;
     width: 32px;
     height: 32px;
     background: rgba(255, 0, 0, .6);

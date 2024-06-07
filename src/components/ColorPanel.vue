@@ -5,14 +5,15 @@ import CustomCursor from "./kits/CustomCursor.vue";
 import ColorItem from "./ColorItem.vue";
 import {Clipboard} from '../utils/clipboard';
 import Toast from "./kits/Toast.vue";
+import TcMenu from "../components/kits/Menu.vue";
 // import Parallax from "./Parallax.vue";
 
 const current = ref(0)
-const currentText = ref(0)
+const currentId = ref(0)
 const {colors} = useColors();
 const cursorSize = ref('large')
 const cursorColor = ref<number[]>([249, 244, 220])
-const cursorText = ref('中国传统色·Traditional Chinese Colors·')
+const cursorText = ref('中國傳統色·Traditional Colors of China·')
 const cursorInnerText = ref('乳白')
 
 
@@ -20,7 +21,7 @@ const length = computed(() => {
   return colors.length
 })
 const handleClick = () => {
-  cursorColor.value = colors[current.value].RGB
+  cursorColor.value = [colors[current.value].r, colors[current.value].g, colors[current.value].b]
   cursorInnerText.value = colors[current.value].name
 }
 const handleNext = () => {
@@ -30,7 +31,7 @@ const handleNext = () => {
   }
   handleClick()
   setTimeout(() => {
-    currentText.value = current.value
+    currentId.value = current.value
     cursorInnerText.value = '下一个'
   }, 500)
 }
@@ -41,13 +42,13 @@ const handlePrev = () => {
   }
   handleClick()
   setTimeout(() => {
-    currentText.value = current.value
+    currentId.value = current.value
     cursorInnerText.value = '上一个'
   }, 500)
 }
 const showToast = ref(false)
-const onClickItem = (hex: string) => {
-  Clipboard.copy(hex)
+const onClickItem = (color: any) => {
+  Clipboard.copy(`${color.name}:${color.hex}`)
   showToast.value = true
   setTimeout(() => {
     showToast.value = false
@@ -56,9 +57,27 @@ const onClickItem = (hex: string) => {
 const copyContent = computed(() => {
   return `复制成功: ${colors[current.value]?.name}${colors[current.value]?.hex}`
 })
+const handleClickMenuItem = (item, id) => {
+  current.value = id
+  setTimeout(() => {
+    currentId.value = current.value
+  }, 500)
+}
+const onMouseenterMenu = () => {
+  cursorSize.value = 'small'
+  cursorInnerText.value = '录'
+}
+const onMouseenterPanel = () => {
+  cursorSize.value = 'large'
+  cursorInnerText.value = colors[current.value].name
+}
 </script>
 
 <template>
+  <tc-menu
+      @mouseenter="onMouseenterMenu"
+      @click-item="handleClickMenuItem"
+  />
   <toast v-model="showToast" :content="copyContent"/>
   <custom-cursor
       :size="cursorSize"
@@ -68,7 +87,7 @@ const copyContent = computed(() => {
   />
   <div class="color-panel"
        :style="{background: colors[current]?.hex}"
-       @mouseenter="cursorInnerText = colors[current].name"
+       @mouseenter="onMouseenterPanel"
   >
     <div class="panel-nav-left"
          @click="handlePrev"
@@ -81,15 +100,17 @@ const copyContent = computed(() => {
          @mouseleave="cursorInnerText =  colors[current].name"
     ></div>
     <div class="color-panel-title">
-      <div class="title-cn">中国传统色</div>
+      <div class="title-cn">中國傳統色</div>
       <div class="title-en">——· Traditional Chinese colors ·——</div>
     </div>
     <div class="color-panel-container">
       <color-item
-            @click="onClickItem(colors[current].hex)"
-            :title="colors[current]?.name"
-            :show="currentText === colors[current]?.id"
-        />
+          @click="onClickItem(colors[current])"
+          :title="colors[current]?.name"
+          :sentence="colors[current]?.sentence"
+          :from="colors[current]?.sentenceFrom"
+          :show="currentId === colors[current]?.id"
+      />
     </div>
   </div>
 </template>
@@ -123,6 +144,7 @@ const copyContent = computed(() => {
     font-size: 18px;
     width: 100%;
     text-align: center;
+    mix-blend-mode: soft-light;
 
     .title-cn {
       font-size: 48px;
