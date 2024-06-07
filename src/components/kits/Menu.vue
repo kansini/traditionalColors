@@ -11,6 +11,9 @@ const handleClickItem = (groupIndex: number, index: number) => {
   const length = 16
   const id: number = groupIndex * length + index
   emit("clickItem", id)
+  setTimeout(() => {
+    showModal.value = false
+  })
 }
 </script>
 
@@ -21,13 +24,16 @@ const handleClickItem = (groupIndex: number, index: number) => {
     <div></div>
   </div>
   <tc-modal v-model="showModal">
-    <div v-for="(group, groupIndex) in colorsByCategory">
-      <h2>{{ group.category }}</h2>
-      <div
-          class="menu-item"
-          v-for="(item,index) in group.data"
-          @click="handleClickItem(groupIndex,index)">
-        {{ item.name }}
+    <div class="menu-list">
+      <div class="menu-group" v-for="(group, groupIndex) in colorsByCategory">
+        <div class="menu-group-title">{{ group.category }}</div>
+        <div
+            class="menu-item"
+            v-for="(item,index) in group.data"
+            :style="{background: item.hex}"
+            @click="handleClickItem(groupIndex,index)">
+          {{ item.name }}
+        </div>
       </div>
     </div>
   </tc-modal>
@@ -63,7 +69,42 @@ const handleClickItem = (groupIndex: number, index: number) => {
   }
 }
 
-.menu-item {
-  cursor: pointer;
+.menu-list {
+  display: flex;
+  flex-wrap: wrap;
+  //justify-content: center;
+  gap: 40px;
+
+  .menu-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    .menu-group-title {
+      font-size: 20px;
+      writing-mode: vertical-rl;
+    }
+
+    .menu-item {
+      cursor: pointer;
+      writing-mode: vertical-rl;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 72px;
+      border-radius: 8px;
+      color: #fff;
+      opacity: .6;
+      transition: all ease-in .4s;
+
+      &:hover {
+        opacity: 1;
+        border-radius: 16px;
+        transform: translateY(-8px);
+      }
+    }
+  }
 }
+
 </style>

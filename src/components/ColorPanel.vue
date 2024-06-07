@@ -59,6 +59,7 @@ const copyContent = computed(() => {
 })
 const handleClickMenuItem = (id: number) => {
   current.value = id
+  handleClick()
   setTimeout(() => {
     currentId.value = current.value
   }, 500)

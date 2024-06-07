@@ -25,8 +25,8 @@ const show = defineModel()
   width: 100vw;
   height: 100vh;
   z-index: 9999;
-  background: rgba(255, 255, 255, .1);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, .8);
+  backdrop-filter: blur(8px);
 
   .tc-modal-header {
     width: 100%;
@@ -44,6 +44,9 @@ const show = defineModel()
       font-size: 20px;
       cursor: pointer;
     }
+  }
+  .tc-modal-content{
+    padding: 0 24px;
   }
 }
 </style>
