@@ -5,7 +5,7 @@ import CustomCursor from "./kits/CustomCursor.vue";
 import ColorItem from "./ColorItem.vue";
 import {Clipboard} from '../utils/clipboard';
 import Toast from "./kits/Toast.vue";
-import TcMenu from "../components/kits/Menu.vue";
+import NavBar from "./NavBar.vue";
 // import Parallax from "./Parallax.vue";
 
 const current = ref(0)
@@ -48,7 +48,7 @@ const handlePrev = () => {
 }
 const showToast = ref(false)
 const onClickItem = (color: any) => {
-  Clipboard.copy(`${color.name}:${color.hex}`)
+  Clipboard.copy(`${color.hex}`)
   showToast.value = true
   setTimeout(() => {
     showToast.value = false
@@ -64,9 +64,9 @@ const handleClickMenuItem = (id: number) => {
     currentId.value = current.value
   }, 500)
 }
-const onMouseenterMenu = () => {
+const onMouseenterMenu = (name: string) => {
   cursorSize.value = 'small'
-  cursorInnerText.value = '录'
+  cursorInnerText.value = name
 }
 const onMouseenterPanel = () => {
   cursorSize.value = 'large'
@@ -75,7 +75,8 @@ const onMouseenterPanel = () => {
 </script>
 
 <template>
-  <tc-menu
+  <nav-bar
+      :color="cursorColor"
       @mouseenter="onMouseenterMenu"
       @click-item="handleClickMenuItem"
   />
@@ -102,7 +103,7 @@ const onMouseenterPanel = () => {
     ></div>
     <div class="color-panel-title">
       <div class="title-cn">中國傳統色</div>
-      <div class="title-en">——· Traditional Chinese colors ·——</div>
+      <div class="title-en">——· Traditional Colors of China ·——</div>
     </div>
     <div class="color-panel-container">
       <color-item
@@ -119,7 +120,6 @@ const onMouseenterPanel = () => {
 <style scoped lang="scss">
 .color-panel {
   position: relative;
-  padding: 40px;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -142,13 +142,14 @@ const onMouseenterPanel = () => {
   }
 
   .color-panel-title {
-    font-size: 18px;
+    padding: 40px;
+    font-size: 20px;
     width: 100%;
     text-align: center;
     mix-blend-mode: soft-light;
 
     .title-cn {
-      font-size: 48px;
+      font-size: 56px;
       letter-spacing: 16px;
       margin-bottom: 8px;
     }

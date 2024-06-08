@@ -27,12 +27,14 @@ const handleClickItem = (groupIndex: number, index: number) => {
     <div class="menu-list">
       <div class="menu-group" v-for="(group, groupIndex) in colorsByCategory">
         <div class="menu-group-title">{{ group.category }}</div>
-        <div
-            class="menu-item"
-            v-for="(item,index) in group.data"
-            :style="{background: item.hex}"
-            @click="handleClickItem(groupIndex,index)">
-          {{ item.name }}
+        <div class="menu-item-list">
+          <div
+              class="menu-item"
+              v-for="(item,index) in group.data"
+              :style="{background: item.hex}"
+              @click="handleClickItem(groupIndex,index)">
+            <span>{{ item.name }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -41,69 +43,82 @@ const handleClickItem = (groupIndex: number, index: number) => {
 
 <style scoped lang="scss">
 .menu-trigger {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 72px;
-  height: 72px;
+  width: 24px;
+  height: 24px;
+  border-radius: 20px;
+  border: 4px solid rgba(255, 255, 255, .6);
+  mix-blend-mode: difference;
+  transition: all ease-in .3s;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  z-index: 999;
-
-  div {
-    width: 24px;
-    height: 24px;
-    border-radius: 20px;
-    border: 5px solid rgba(255, 255, 255, .6);
-    mix-blend-mode: difference;
-    transition: all ease-in .3s;
-  }
 
   &:hover {
-    div {
-      border: 4px solid rgba(255, 255, 255, .9);
-      transform: scale(1.5);
-    }
+    border: 2px solid rgba(255, 255, 255, .9);
+    transform: scale(1.2);
+  }
+
+  &:before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .6);
   }
 }
 
 .menu-list {
   display: flex;
   flex-wrap: wrap;
-  //justify-content: center;
-  gap: 40px;
+  gap: 16px 32px;
+  justify-content: center;
 
   .menu-group {
     display: flex;
-    gap: 8px;
+    gap: 24px 16px;
     align-items: center;
 
     .menu-group-title {
       font-size: 20px;
-      writing-mode: vertical-rl;
+      width: 20px;
     }
 
-    .menu-item {
-      cursor: pointer;
-      writing-mode: vertical-rl;
+    .menu-item-list {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 72px;
-      border-radius: 8px;
-      color: #fff;
-      opacity: .6;
-      transition: all ease-in .4s;
+      gap: 0 16px;
 
-      &:hover {
-        opacity: 1;
-        border-radius: 16px;
-        transform: translateY(-8px);
+      .menu-item {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 60px;
+        font-size: 12px;
+        border-radius: 8px;
+        color: #fff;
+        opacity: .6;
+        transition: all ease-in .4s;
+
+        span {
+          width: 12px;
+          transition: all ease-in .4s;
+        }
+
+        &:hover {
+          opacity: 1;
+          border-radius: 16px;
+          transform: scale(1.8) ;
+
+          span {
+            mix-blend-mode: difference;
+          }
+        }
       }
     }
+
   }
 }
 

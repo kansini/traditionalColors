@@ -3,18 +3,20 @@ const show = defineModel()
 </script>
 
 <template>
-  <transition name="fadeRight">
-    <div class="tc-modal" v-if="show">
-      <div class="tc-modal-header">
-        <div class="tc-modal-close" @click="show = false">
-          <span>×</span>
+  <teleport to="body">
+    <transition name="fadeUp">
+      <div class="tc-modal" v-if="show">
+        <div class="tc-modal-header">
+          <div class="tc-modal-close" @click="show = false">
+            <span>×</span>
+          </div>
+        </div>
+        <div class="tc-modal-content">
+          <slot></slot>
         </div>
       </div>
-      <div class="tc-modal-content">
-        <slot></slot>
-      </div>
-    </div>
-  </transition>
+    </transition>
+  </teleport>
 </template>
 
 <style scoped lang="scss">
@@ -26,7 +28,7 @@ const show = defineModel()
   height: 100vh;
   z-index: 9999;
   background: rgba(255, 255, 255, .8);
-  backdrop-filter: blur(8px);
+  backdrop-filter: saturate(120%) blur(6px);
 
   .tc-modal-header {
     width: 100%;
@@ -38,15 +40,25 @@ const show = defineModel()
     .tc-modal-close {
       width: 40px;
       height: 40px;
+      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 20px;
       cursor: pointer;
+      transition: all ease-in .3s;
+
+      &:hover {
+        transform: rotate(90deg);
+      }
     }
   }
-  .tc-modal-content{
-    padding: 0 24px;
+
+  .tc-modal-content {
+    display: flex;
+    width: 100%;
+    height: calc(100% - 40px);
+    align-items: center;
   }
 }
 </style>
