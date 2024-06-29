@@ -49,7 +49,7 @@ const handlePrev = () => {
 const showToast = ref(false)
 const onClickItem = (color: any) => {
   Clipboard.copy(`${color.hex}`)
-  showToast.value = true
+  showToast.value = true;
   setTimeout(() => {
     showToast.value = false
   }, 1500)
@@ -149,7 +149,7 @@ const onMouseenterPanel = () => {
     mix-blend-mode: soft-light;
 
     .title-cn {
-      font-size: 56px;
+      font-size: 40px;
       letter-spacing: 16px;
       margin-bottom: 8px;
     }
