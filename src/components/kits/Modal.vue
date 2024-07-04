@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import {useCursorStore} from "@/store";
+
+const cursorStore = useCursorStore();
 const show = defineModel()
+const onClose = () => {
+  show.value = false
+  cursorStore.setCursor("default")
+}
 </script>
 
 <template>
@@ -7,7 +14,7 @@ const show = defineModel()
     <transition name="fadeUp">
       <div class="tc-modal" v-if="show">
         <div class="tc-modal-header">
-          <div class="tc-modal-close" @click="show = false">
+          <div class="tc-modal-close" @click="onClose">
             <span>×</span>
           </div>
         </div>
@@ -26,7 +33,7 @@ const show = defineModel()
   position: fixed;
   width: 100vw;
   height: 100vh;
-  z-index: 9999;
+  z-index: 999;
   background: rgba(255, 255, 255, .8);
   backdrop-filter: saturate(120%) blur(6px);
 
@@ -55,10 +62,9 @@ const show = defineModel()
   }
 
   .tc-modal-content {
-    display: flex;
     width: 100%;
     height: calc(100% - 40px);
-    align-items: center;
+    overflow: auto;
   }
 }
 </style>

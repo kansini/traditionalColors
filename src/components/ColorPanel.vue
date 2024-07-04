@@ -3,26 +3,24 @@ import useColors from "../hooks/useColors";
 import {computed, ref} from "vue";
 import CustomCursor from "./kits/CustomCursor.vue";
 import ColorItem from "./ColorItem.vue";
-import {Clipboard} from '../utils/clipboard';
+import {Clipboard} from "../utils/clipboard";
 import Toast from "./kits/Toast.vue";
 import NavBar from "./NavBar.vue";
-// import Parallax from "./Parallax.vue";
+import {useCursorStore} from "@/store";
+
+const cursorStore = useCursorStore();
 
 const current = ref(0)
 const currentId = ref(0)
 const {colors} = useColors();
-const cursorSize = ref('large')
-const cursorColor = ref<number[]>([249, 244, 220])
-const cursorText = ref('中國傳統色·Traditional Colors of China·')
-const cursorInnerText = ref('乳白')
 
 
 const length = computed(() => {
   return colors.length
 })
 const handleClick = () => {
-  cursorColor.value = [colors[current.value].r, colors[current.value].g, colors[current.value].b]
-  cursorInnerText.value = colors[current.value].name
+  cursorStore.color = [colors[current.value].r, colors[current.value].g, colors[current.value].b]
+  cursorStore.innerText = colors[current.value].name
 }
 const handleNext = () => {
   current.value++
@@ -32,7 +30,7 @@ const handleNext = () => {
   handleClick()
   setTimeout(() => {
     currentId.value = current.value
-    cursorInnerText.value = '下一个'
+    cursorStore.innerText = "下一个"
   }, 500)
 }
 const handlePrev = () => {
@@ -43,7 +41,7 @@ const handlePrev = () => {
   handleClick()
   setTimeout(() => {
     currentId.value = current.value
-    cursorInnerText.value = '上一个'
+    cursorStore.innerText = "上一个"
   }, 500)
 }
 const showToast = ref(false)
@@ -62,30 +60,31 @@ const handleClickMenuItem = (id: number) => {
   handleClick()
   setTimeout(() => {
     currentId.value = current.value
+
   }, 500)
 }
 const onMouseenterMenu = (name: string) => {
-  cursorSize.value = 'small'
-  cursorInnerText.value = name
+  cursorStore.size = "small"
+  cursorStore.innerText = name
 }
 const onMouseenterPanel = () => {
-  cursorSize.value = 'large'
-  cursorInnerText.value = colors[current.value].name
+  cursorStore.size = "large"
+  cursorStore.innerText = colors[current.value].name
 }
 </script>
 
 <template>
   <nav-bar
-      :color="cursorColor"
+      :color="cursorStore.color"
       @mouseenter="onMouseenterMenu"
       @click-item="handleClickMenuItem"
   />
   <toast v-model="showToast" :content="copyContent"/>
   <custom-cursor
-      :size="cursorSize"
-      :text="cursorText"
-      :color="cursorColor"
-      :inner-text="cursorInnerText"
+      :size="cursorStore.size"
+      :text="cursorStore.text"
+      :color="cursorStore.color"
+      :inner-text="cursorStore.innerText"
   />
   <div class="color-panel"
        :style="{background: colors[current]?.hex}"
@@ -93,13 +92,13 @@ const onMouseenterPanel = () => {
   >
     <div class="panel-nav-left"
          @click="handlePrev"
-         @mouseenter="cursorInnerText = '上一个'"
-         @mouseleave="cursorInnerText =  colors[current].name"
+         @mouseenter="cursorStore.innerText = '上一个'"
+         @mouseleave="cursorStore.innerText =  colors[current].name"
     ></div>
     <div class="panel-nav-right"
          @click="handleNext"
-         @mouseenter="cursorInnerText = '下一个'"
-         @mouseleave="cursorInnerText =  colors[current].name"
+         @mouseenter="cursorStore.innerText = '下一个'"
+         @mouseleave="cursorStore.innerText =  colors[current].name"
     ></div>
     <div class="color-panel-title">
       <div class="title-cn">中國傳統色</div>

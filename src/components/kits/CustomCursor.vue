@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-import {computed, onMounted, onUnmounted, ref} from 'vue'
-import {ScrollToPlugin} from 'gsap/ScrollToPlugin';
-import gsap from 'gsap'
+import {computed, onMounted, onUnmounted, ref} from "vue"
+import {ScrollToPlugin} from "gsap/ScrollToPlugin";
+import gsap from "gsap"
 
 gsap.registerPlugin(ScrollToPlugin)
 
@@ -13,14 +13,15 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  size: '',
-  text: '',
-  innerText: ""
+  size: "",
+  text: "",
+  innerText: "",
+  color: () => [0, 0, 0]
 })
 const cursorInner = ref(null)
 const cursorOuter = ref(null)
 const onMouseMove = (e: any) => {
-  const offset = props.size == '' ? 24 : 56
+  const offset = props.size == "" ? 24 : 56
   // cursorInner.value.style.opacity = 1
   gsap.to(cursorOuter.value, {
     x: e.clientX - offset,
@@ -39,10 +40,10 @@ const innerColor = computed(() => {
   return `rgba(${r + 20},${g + 10},${b + 10},${a})`
 })
 onMounted(() => {
-  document.addEventListener('mousemove', onMouseMove)
+  document.addEventListener("mousemove", onMouseMove)
 })
 onUnmounted(() => {
-  document.removeEventListener('mousemove', onMouseMove)
+  document.removeEventListener("mousemove", onMouseMove)
 })
 
 </script>
@@ -84,7 +85,7 @@ onUnmounted(() => {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: rgba(255, 0, 0, .5);
+    background: rgba(255, 255, 255, .5);
     will-change: transform;
     opacity: 0;
     mix-blend-mode: color-burn;
